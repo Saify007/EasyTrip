@@ -1,0 +1,604 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    background-color: #f4f7f9;
+    line-height: 1.6;
+    scroll-behavior: smooth;
+}
+
+header {
+    background-color: #fff;
+    box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.05);
+    padding: 1rem 0;
+    position: sticky; /* Sticky header */
+    top: 0;
+    z-index: 100;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #3498db;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logo i {
+    font-size: 2.2rem; /* Increased logo icon size */
+}
+
+.nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: #555;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    display: flex; /* Align icon and text vertically */
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.nav-links li a i {
+    font-size: 1.3rem; /* Increased nav link icon size */
+    margin-right: 0.3rem; /* Add some spacing between icon and text */
+    color: #3498db; /* Make icons in nav links more prominent color */
+}
+
+
+.nav-links li a:hover {
+    color: #3498db;
+}
+
+section {
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    scroll-margin-top: 80px; /* Adjust for sticky header */
+}
+
+.feature-section {
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.08);
+    margin-bottom: 2.5rem;
+    overflow: hidden; /* For rounded corners on images/maps inside */
+}
+
+section h2 {
+    color: #3498db;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    border-bottom: 3px solid #eee;
+    padding-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-weight: 600;
+}
+
+section h2 i {
+    font-size: 2rem; /* Increased section heading icon size */
+    color: #3498db;
+}
+
+/* Hero Section */
+#hero-section {
+    background: linear-gradient(135deg, #e0f7fa, #ccebff);
+    text-align: center;
+    color: #333;
+    padding: 8rem 2rem;
+    border-radius: 0;
+    box-shadow: none;
+    margin-bottom: 2rem;
+}
+
+#hero-section .hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+#hero-section h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #2c3e50;
+}
+
+#hero-section p {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 2rem;
+}
+
+.search-bar {
+    display: flex;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.search-bar input[type="text"] {
+    flex-grow: 1;
+    padding: 1rem;
+    border: 2px solid #3498db;
+    border-radius: 10px 0 0 10px;
+    font-size: 1.1rem;
+    outline: none;
+}
+
+.search-bar button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 0 10px 10px 0;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-bar button:hover {
+    background-color: #2980b9;
+}
+
+
+/* Preferences Section */
+#preferences-section {
+    background-color: #f9f9f9;
+}
+
+#preferences-section .preferences-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    align-items: start;
+}
+
+.preference-group {
+    margin-bottom: 1.5rem;
+}
+
+.preference-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #555;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.preference-group label i {
+    color: #3498db;
+    font-size: 1.4rem; /* Increased preference label icon size */
+}
+
+
+.preference-group select,
+.preference-group input[type="checkbox"] {
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box; /* Important for width to include padding/border */
+    margin-bottom: 0.8rem;
+    appearance: none; /* Remove default styling for consistent look */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="black" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+    background-repeat: no-repeat;
+    background-position-x: 100%;
+    background-position-y: 5px;
+    padding-right: 2rem; /* Make space for dropdown arrow */
+}
+
+.preference-group select:focus,
+.preference-group input[type="checkbox"]:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+.preference-group input[type="checkbox"] {
+    width: auto; /* Adjust width for checkbox */
+    margin-right: 0.5rem;
+    padding: 0.5rem;
+    vertical-align: middle;
+    cursor: pointer;
+    appearance: checkbox; /* Re-enable checkbox appearance */
+    -webkit-appearance: checkbox;
+    -moz-appearance: checkbox;
+    background-image: none; /* Remove dropdown arrow for checkbox */
+    padding-right: 1rem; /* Reset padding-right */
+}
+
+.preference-group.discount-filter {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.preference-group.discount-filter label {
+    margin-bottom: 0; /* Adjust label margin */
+    font-weight: normal; /* Adjust label font-weight */
+}
+
+
+#preferences-section button {
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    padding: 1rem 2.5rem;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block; /* Make button full width on smaller screens if needed */
+    margin-top: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 300px; /* Limit button width */
+}
+
+#preferences-section button:hover {
+    background-color: #27ae60;
+}
+
+
+/* Recommendations Section */
+#recommendations-section {
+    background-color: #f0f4f7; /* Light background for recommendations */
+}
+
+#recommendations-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem;
+    margin-top: 2rem;
+}
+
+.recommendation-item {
+    background-color: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out, box-shadow 0.3s ease;
+    position: relative; /* For discount badge positioning */
+}
+
+.recommendation-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.8rem 1.6rem rgba(0, 0, 0, 0.15);
+}
+
+.discount-badge {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background-color: #e74c3c;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: bold;
+    z-index: 1; /* Ensure badge is on top of image */
+}
+
+
+.package-image {
+    width: 100%;
+    height: 200px; /* Fixed image height */
+    object-fit: cover;
+    display: block; /* Prevent extra space below image */
+    border-radius: 15px 15px 0 0; /* Rounded corners at top */
+}
+
+.recommendation-item h3 {
+    margin: 1.5rem 1.8rem 1rem 1.8rem;
+    font-size: 1.5rem;
+    color: #3498db;
+    line-height: 1.2;
+}
+
+.recommendation-item p {
+    margin: 0 1.8rem 1rem 1.8rem;
+    color: #555;
+    font-size: 1.1rem;
+}
+
+.recommendation-item p.original-price {
+    text-decoration: line-through;
+    color: #777;
+    margin-right: 0.5rem;
+    display: inline-block;
+}
+
+.recommendation-item p.discounted-price {
+    color: #e67e22;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.recommendation-item p.coupon-code {
+    background-color: #f0f0f0;
+    padding: 0.4rem 0.6rem;
+    border-radius: 5px;
+    font-family: monospace;
+    font-size: 0.9rem;
+    color: #27ae60;
+    display: inline-block;
+}
+
+
+.view-details-button,
+.like-button {
+    background-color: #fff;
+    color: #3498db;
+    border: 2px solid #3498db;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin: 0 0.8rem 1.8rem 1.8rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+}
+
+.view-details-button i,
+.like-button i {
+    font-size: 1.2rem; /* Increased button icon size */
+}
+
+.view-details-button:hover,
+.like-button:hover {
+    background-color: #3498db;
+    color: white;
+}
+
+.like-button.liked {
+    background-color: #e74c3c;
+    color: white;
+    border-color: #e74c3c;
+}
+
+.like-button.liked:hover {
+    background-color: #c0392b;
+    border-color: #c0392b;
+}
+
+
+.package-details {
+    padding: 0 1.8rem 1.8rem 1.8rem;
+    border-top: 1px solid #eee;
+    margin-top: 1.5rem;
+    display: none; /* Initially hidden */
+}
+
+.package-details.expanded {
+    display: block; /* Show details when expanded class is present */
+}
+
+.package-details h4 {
+    color: #2ecc71;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    display: flex; /* Align icon and text vertically */
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.package-details h4 i {
+    font-size: 1.3rem; /* Increased details section heading icon size */
+}
+
+
+.package-details ul {
+    list-style: square;
+    padding-left: 1.5rem;
+    margin-top: 0;
+}
+
+.package-details li {
+    margin-bottom: 0.5rem;
+    color: #666;
+    font-size: 1.1rem;
+}
+
+#recommendations-section p#loading-message,
+#recommendations-section p#no-recommendations {
+    text-align: center;
+    font-style: italic;
+    color: #777;
+    font-size: 1.1rem;
+    margin-top: 2rem;
+}
+
+#recommendations-section p#discount-fallback-message {
+    color: #e67e22;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+
+/* Related Recommendations Section - Reusing styles from Recommendations Section */
+#related-recommendations-section {
+    background-color: #fff; /* White background for related section */
+}
+
+#related-recommendations-section h2 {
+    color: #e67e22; /* Orange title for related recommendations */
+    border-bottom-color: #e67e22;
+}
+
+#related-recommendations-list {
+    display: flex;
+    overflow-x: auto; /* Horizontal scroll for related packages */
+    gap: 1.5rem;
+    padding-bottom: 1.5rem; /* Space for scrollbar */
+}
+
+#related-recommendations-list .recommendation-item {
+    width: 80%; /* Adjust width as needed for scrollable items */
+    min-width: 280px; /* Minimum width for each item */
+    flex: 0 0 auto; /* Don't grow, don't shrink, auto width */
+    margin-bottom: 0; /* Reset bottom margin */
+}
+
+
+/* 360 Preview Section - Styles are inlined in index.html and script.js */
+
+
+/* Interactive Map Section - Styles are inlined in index.html and script.js */
+
+
+/* Travel Stories Section - Styles are inlined in index.html and script.js */
+
+
+/* Carbon Offset Section - Styles are inlined in index.html and script.js */
+
+
+/* AI Concierge Section - Reusing styles from Recommendations Section */
+#ai-concierge-recommendations {
+    background-color: #f0f4f7; /* Light background for AI recommendations */
+}
+
+#ai-concierge-recommendations h2 {
+    color: #2ecc71; /* Green title for AI recommendations */
+    border-bottom-color: #2ecc71;
+}
+
+#ai-recommendations-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem;
+    margin-top: 2rem;
+}
+
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 2rem 0;
+    font-size: 0.9rem;
+}
+
+footer p {
+    margin-bottom: 1rem;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.footer-links li a {
+    color: #eee;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-links li a:hover {
+    color: #fff;
+}
+
+
+/* Responsive Design - Adjustments for smaller screens */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 1rem;
+    }
+
+    .logo {
+        justify-content: center;
+        margin-bottom: 1rem;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+
+    #hero-section {
+        padding: 6rem 2rem;
+    }
+
+    #hero-section h1 {
+        font-size: 2.5rem;
+    }
+
+    #hero-section p {
+        font-size: 1.1rem;
+    }
+
+    .search-bar {
+        flex-direction: column;
+    }
+
+    .search-bar input[type="text"] {
+        border-radius: 10px 10px 0 0;
+    }
+
+    .search-bar button {
+        border-radius: 0 0 10px 10px 0;
+    }
+
+    #preferences-section .preferences-container {
+        grid-template-columns: 1fr; /* Stack preference groups on smaller screens */
+    }
+
+    #preferences-section button {
+        max-width: none; /* Full width button on small screens */
+    }
+
+    #related-recommendations-list {
+        display: grid; /* Change related recommendations to grid on smaller screens */
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        overflow-x: visible; /* Disable horizontal scroll on smaller screens */
+    }
+
+    #related-recommendations-list .recommendation-item {
+        width: 100%; /* Full width for related items on smaller screens */
+    }
+
+    footer {
+        padding: 2rem 1rem;
+    }
+
+    .footer-links {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
