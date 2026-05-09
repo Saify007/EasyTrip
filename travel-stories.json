@@ -1,0 +1,35 @@
+[
+    {
+        "title": "My Incredible Bali Adventure",
+        "author": "Sarah J.",
+        "image": "bali-story.jpg",
+        "excerpt": "Bali was a dream come true! From the stunning beaches of Seminyak to the lush rice paddies of Ubud, every moment was magical...",
+        "link": "#story1",
+        "date": "2025-03-15",
+        "rating": 5,
+        "tags": ["adventure", "culture", "beach"],
+        "readTime": 6
+    },
+    {
+        "title": "A Romantic Escape to Paris",
+        "author": "David L.",
+        "image": "paris-story.jpg",
+        "excerpt": "Paris in the spring... is there anything more romantic? Exploring the Louvre, strolling along the Seine, and enjoying delicious pastries made for an unforgettable trip...",
+        "link": "#story2",
+        "date": "2025-01-22",
+        "rating": 5,
+        "tags": ["romantic", "food", "city"],
+        "readTime": 8
+    },
+    {
+        "title": "Kyoto: A Journey Through Ancient Japan",
+        "author": "Emily K.",
+        "image": "kyoto-story.jpg",
+        "excerpt": "Kyoto captivated me with its serene temples, beautiful gardens, and rich cultural heritage. The tea ceremonies and traditional markets were highlights...",
+        "link": "#story3",
+        "date": "2025-04-10",
+        "rating": 5,
+        "tags": ["culture", "temples", "history"],
+        "readTime": 7
+    }
+]

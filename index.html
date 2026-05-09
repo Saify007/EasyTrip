@@ -1,150 +1,271 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Dream Getaway Awaits</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="EasyTrip - Discover curated travel packages, real-time destination insights, and personalized recommendations for your perfect getaway." />
+    <meta name="theme-color" content="#0F172A" />
+    <title>EasyTrip | Your Dream Getaway Awaits</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css" />
     <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div id="notification-container" aria-live="polite" aria-atomic="true"></div>
+
     <header>
-        <nav>
-            <div class="logo">
-                <i class="fas fa-plane-departure"></i> EasyTrip
+        <nav aria-label="Main navigation">
+            <div class="logo" role="banner">
+                <i class="fas fa-plane-departure" aria-hidden="true"></i>
+                <span>EasyTrip</span>
             </div>
-            <ul class="nav-links">
-                <li><a href="#recommendations-section">Recommendations</a></li>
-                <li><a href="#destination-preview">360° Preview</a></li>
-                <li><a href="#interactive-map-section">Interactive Map</a></li>
-                <li><a href="#travel-stories-section">Travel Stories</a></li>
-                <li><a href="#ai-concierge-recommendations">AI Concierge</a></li>
+            <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">
+                <span class="hamburger"></span>
+            </button>
+            <ul class="nav-links" id="nav-links" role="menubar">
+                <li role="none"><a href="#recommendations-section" role="menuitem">Recommendations</a></li>
+                <li role="none"><a href="#destination-preview" role="menuitem">360&deg; Preview</a></li>
+                <li role="none"><a href="#interactive-map-section" role="menuitem">Interactive Map</a></li>
+                <li role="none"><a href="#travel-stories-section" role="menuitem">Travel Stories</a></li>
+                <li role="none"><a href="#ai-concierge-recommendations" role="menuitem">AI Concierge</a></li>
             </ul>
+            <div class="nav-controls">
+                <div class="currency-widget" aria-label="Currency converter">
+                    <select id="currency-select" aria-label="Select currency">
+                        <option value="USD" selected>USD ($)</option>
+                        <option value="EUR">EUR (&euro;)</option>
+                        <option value="GBP">GBP (&pound;)</option>
+                        <option value="JPY">JPY (&yen;)</option>
+                        <option value="CAD">CAD (C$)</option>
+                        <option value="AUD">AUD (A$)</option>
+                        <option value="INR">INR (&#8377;)</option>
+                        <option value="BRL">BRL (R$)</option>
+                        <option value="THB">THB (&#3647;)</option>
+                        <option value="SGD">SGD (S$)</option>
+                    </select>
+                    <span id="currency-rate" class="currency-rate" aria-live="polite"></span>
+                </div>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon" aria-hidden="true"></i>
+                </button>
+            </div>
         </nav>
     </header>
 
-    <section id="hero-section">
-        <div class="hero-content">
-            <h1>Find Your Perfect Getaway</h1>
-            <p>Explore curated travel packages and discover your dream destination.</p>
-            <div class="search-bar">
-                <input type="text" placeholder="Where are you dreaming of going? (Coming Soon)">
-                <button>Search</button>
-            </div>
-        </div>
-    </section>
-
-    <section id="preferences-section" class="feature-section">
-        <h2><i class="fas fa-sliders-h"></i> Tell us your preferences</h2>
-        <div class="preferences-container">
-            <div class="preference-group">
-                <label for="theme"><i class="fas fa-palette"></i> Theme:</label>
-                <select id="theme">
-                    <option value="">Any</option>
-                    <option value="adventure">Adventure</option>
-                    <option value="romantic">Romantic</option>
-                    <option value="cultural">Cultural</option>
-                    <option value="family">Family</option>
-                    <option value="relaxation">Relaxation</option>
-                </select>
-            </div>
-
-            <div class="preference-group">
-                <label for="budget"><i class="fas fa-dollar-sign"></i> Budget:</label>
-                <select id="budget">
-                    <option value="">Any</option>
-                    <option value="budget-friendly">Budget-friendly</option>
-                    <option value="moderate">Moderate</option>
-                    <option value="luxury">Luxury</option>
-                </select>
-            </div>
-
-            <div class="preference-group discount-filter">
-                <input type="checkbox" id="discount">
-                <label for="discount"><i class="fas fa-percent"></i> Show Discounted Deals</label>
-            </div>
-
-             <section id="sustainability-filters" class="preference-group">
-                <label><i class="fas fa-leaf"></i> Sustainability & Ethical Travel:</label>
-                <div class="filter-options">
-                    <input type="checkbox" id="eco-certified">
-                    <label for="eco-certified">Eco-Certified Hotels</label>
-
-                    <input type="checkbox" id="ethical-tours">
-                    <label for="ethical-tours">Ethical Tours</label>
-
-                    <input type="checkbox" id="local-businesses">
-                    <label for="local-businesses">Support Local Businesses</label>
+    <main id="main-content">
+        <section id="hero-section" aria-label="Hero banner">
+            <div class="hero-content">
+                <span class="hero-badge"><i class="fas fa-star" aria-hidden="true"></i> Trusted by 50,000+ travelers worldwide</span>
+                <h1>Find Your Perfect Getaway</h1>
+                <p>Explore curated travel packages with real-time insights, live weather, and personalized recommendations tailored just for you.</p>
+                <div class="search-bar">
+                    <input type="text" placeholder="Where are you dreaming of going?" aria-label="Search destinations" />
+                    <button type="button"><i class="fas fa-search" aria-hidden="true"></i> Search</button>
                 </div>
-            </section>
+                <div class="hero-stats" aria-label="Live platform statistics">
+                    <div class="stat-item">
+                        <span class="stat-value" id="stat-travelers" data-target="2847">0</span>
+                        <span class="stat-label">Travelers Online</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="stat-packages">15</span>
+                        <span class="stat-label">Curated Packages</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="stat-countries">12</span>
+                        <span class="stat-label">Countries</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="stat-bookings" data-target="156">0</span>
+                        <span class="stat-label">Bookings Today</span>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-            <button id="get-recommendations-button" onclick="getRecommendations()">Get Recommendations</button>
+        <section id="live-dashboard" class="feature-section" aria-label="Live insights dashboard">
+            <div class="dashboard-grid">
+                <div class="dashboard-card" id="user-location-card">
+                    <h3><i class="fas fa-location-dot" aria-hidden="true"></i> Your Location</h3>
+                    <div class="dashboard-content">
+                        <p id="user-location">Detecting your location...</p>
+                        <p id="user-distance" class="dashboard-highlight"></p>
+                    </div>
+                </div>
+                <div class="dashboard-card">
+                    <h3><i class="fas fa-clock" aria-hidden="true"></i> Best Deal Ends In</h3>
+                    <div class="dashboard-content">
+                        <div class="countdown-timer" id="countdown-timer">
+                            <span class="countdown-unit"><span id="timer-hours">04</span><small>hrs</small></span>
+                            <span class="countdown-sep">:</span>
+                            <span class="countdown-unit"><span id="timer-minutes">32</span><small>min</small></span>
+                            <span class="countdown-sep">:</span>
+                            <span class="countdown-unit"><span id="timer-seconds">18</span><small>sec</small></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="dashboard-card">
+                    <h3><i class="fas fa-chart-line" aria-hidden="true"></i> Live Exchange Rates</h3>
+                    <div class="dashboard-content rate-ticker" id="rate-ticker">
+                        <span class="rate-item">USD/EUR <strong id="rate-usd-eur">--</strong></span>
+                        <span class="rate-item">USD/GBP <strong id="rate-usd-gbp">--</strong></span>
+                        <span class="rate-item">USD/JPY <strong id="rate-usd-jpy">--</strong></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="preferences-section" class="feature-section" aria-label="Travel preferences">
+            <h2><i class="fas fa-sliders-h" aria-hidden="true"></i> Tell Us Your Preferences</h2>
+            <div class="preferences-container">
+                <div class="preference-group">
+                    <label for="theme"><i class="fas fa-palette" aria-hidden="true"></i> Theme</label>
+                    <select id="theme">
+                        <option value="">Any Theme</option>
+                        <option value="adventure">Adventure</option>
+                        <option value="romantic">Romantic</option>
+                        <option value="cultural">Cultural</option>
+                        <option value="family">Family</option>
+                        <option value="relaxation">Relaxation</option>
+                    </select>
+                </div>
+                <div class="preference-group">
+                    <label for="budget"><i class="fas fa-wallet" aria-hidden="true"></i> Budget</label>
+                    <select id="budget">
+                        <option value="">Any Budget</option>
+                        <option value="budget-friendly">Budget-friendly</option>
+                        <option value="moderate">Moderate</option>
+                        <option value="luxury">Luxury</option>
+                    </select>
+                </div>
+                <div class="preference-group">
+                    <label for="season"><i class="fas fa-calendar-alt" aria-hidden="true"></i> Best Season</label>
+                    <select id="season">
+                        <option value="">Any Time</option>
+                        <option value="spring">Spring</option>
+                        <option value="summer">Summer</option>
+                        <option value="autumn">Autumn</option>
+                        <option value="winter">Winter</option>
+                    </select>
+                </div>
+                <div class="preference-group discount-filter">
+                    <input type="checkbox" id="discount" />
+                    <label for="discount"><i class="fas fa-percent" aria-hidden="true"></i> Show Discounted Deals Only</label>
+                </div>
+                <div class="preference-group" id="sustainability-filters">
+                    <label><i class="fas fa-leaf" aria-hidden="true"></i> Sustainability &amp; Ethical Travel</label>
+                    <div class="filter-options">
+                        <input type="checkbox" id="eco-certified" />
+                        <label for="eco-certified">Eco-Certified Hotels</label>
+                        <input type="checkbox" id="ethical-tours" />
+                        <label for="ethical-tours">Ethical Tours</label>
+                        <input type="checkbox" id="local-businesses" />
+                        <label for="local-businesses">Support Local Businesses</label>
+                    </div>
+                </div>
+                <button id="get-recommendations-button" class="primary-button" onclick="getRecommendations()">
+                    <i class="fas fa-wand-magic-sparkles" aria-hidden="true"></i> Get Recommendations
+                </button>
+            </div>
+        </section>
+
+        <section id="recommendations-section" class="feature-section" aria-label="Recommended travel packages">
+            <h2><i class="fas fa-heart" aria-hidden="true"></i> Recommended Packages For You</h2>
+            <div id="recommendations-list" role="list">
+                <div class="skeleton-grid" aria-label="Loading recommendations">
+                    <div class="skeleton-card"></div>
+                    <div class="skeleton-card"></div>
+                    <div class="skeleton-card"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="related-recommendations-section" class="feature-section" style="display:none" aria-label="Related travel recommendations">
+            <h2><i class="fas fa-plus-circle" aria-hidden="true"></i> You Might Also Like</h2>
+            <div id="related-recommendations-list" role="list"></div>
+        </section>
+
+        <section id="destination-preview" class="feature-section" aria-label="360 degree destination preview">
+            <h2><i class="fas fa-vr-cardboard" aria-hidden="true"></i> 360&deg; Destination Preview</h2>
+            <div id="panorama-viewer" role="img" aria-label="Immersive 360 degree view of selected destination"></div>
+            <p>Explore the destination in immersive 360&deg; before you book.</p>
+        </section>
+
+        <section id="interactive-map-section" class="feature-section" aria-label="Interactive destination map">
+            <h2><i class="fas fa-map-marked-alt" aria-hidden="true"></i> Interactive Destination Map</h2>
+            <div id="destination-map" role="application" aria-label="Interactive map showing destination location and points of interest"></div>
+            <p>Explore points of interest and plan your route with our interactive map.</p>
+        </section>
+
+        <section id="live-weather-section" class="feature-section" style="display:none" aria-label="Live destination weather">
+            <h2><i class="fas fa-cloud-sun-rain" aria-hidden="true"></i> Live Weather &amp; 7-Day Forecast</h2>
+            <div id="weather-info" class="weather-grid"></div>
+        </section>
+
+        <section id="travel-stories-section" class="feature-section" aria-label="Travel stories from our community">
+            <h2><i class="fas fa-book-open" aria-hidden="true"></i> Travel Stories from Our Community</h2>
+            <div id="travel-stories-grid" role="list"></div>
+            <p>Read inspiring travel stories and get tips from fellow travelers.</p>
+        </section>
+
+        <section id="carbon-offset-section" class="feature-section" style="display:none" aria-label="Carbon offset calculator">
+            <h2><i class="fas fa-globe-africa" aria-hidden="true"></i> Carbon Offset Option</h2>
+            <div id="carbon-info">
+                <p>Estimate your trip's carbon footprint and contribute to carbon offsetting projects.</p>
+                <p id="carbon-footprint-estimate">Estimated Carbon Footprint: <span id="footprint-value">-- kg CO2</span></p>
+                <button id="offset-button" class="primary-button">
+                    Offset Your Trip <i class="fas fa-hand-holding-heart" aria-hidden="true"></i>
+                </button>
+            </div>
+        </section>
+
+        <section id="ai-concierge-recommendations" class="feature-section" style="display:none" aria-label="AI concierge personalized recommendations">
+            <h2><i class="fas fa-robot" aria-hidden="true"></i> Personalized Recommendations Just For You</h2>
+            <div id="ai-recommendations-list" role="list"></div>
+            <p>Our AI concierge has handpicked these getaways based on your unique preferences.</p>
+        </section>
+    </main>
+
+    <footer role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="logo"><i class="fas fa-plane-departure" aria-hidden="true"></i> EasyTrip</div>
+                <p>Your trusted partner for unforgettable travel experiences since 2020.</p>
+            </div>
+            <div class="footer-links-group">
+                <h4>Company</h4>
+                <ul class="footer-links">
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Press</a></li>
+                </ul>
+            </div>
+            <div class="footer-links-group">
+                <h4>Support</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-links-group">
+                <h4>Connect</h4>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook" aria-hidden="true"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                </div>
+            </div>
         </div>
-    </section>
-
-    <section id="recommendations-section" class="feature-section">
-        <h2><i class="fas fa-heart"></i> Recommended Packages For You</h2>
-        <div id="recommendations-list">
-            <p id="loading-message">Loading recommendations...</p>
+        <div class="footer-bottom">
+            <p>&copy; 2025 EasyTrip. All rights reserved.</p>
+            <p class="api-credits">Data powered by Open-Meteo, OpenStreetMap &amp; Frankfurter</p>
         </div>
-    </section>
-
-    <section id="related-recommendations-section" class="feature-section" style="display:none;">
-        <h2><i class="fas fa-plus-circle"></i> You Might Also Like</h2>
-        <div id="related-recommendations-list">
-        </div>
-    </section>
-
-    <section id="destination-preview" class="feature-section">
-        <h2><i class="fas fa-vr-cardboard"></i> 360° Destination Preview</h2>
-        <div id="panorama-viewer">
-        </div>
-        <p>Explore the destination in immersive 360° before you book!</p>
-    </section>
-
-    <section id="interactive-map-section" class="feature-section">
-        <h2><i class="fas fa-map-marked-alt"></i> Interactive Destination Map</h2>
-        <div id="destination-map">
-        </div>
-        <p>Explore points of interest and plan your route with our interactive map.</p>
-    </section>
-
-    <section id="travel-stories-section" class="feature-section">
-        <h2><i class="fas fa-book-open"></i> Travel Stories from Our Community</h2>
-        <div id="travel-stories-grid">
-        </div>
-        <p>Read inspiring travel stories and get tips from fellow travelers!</p>
-    </section>
-
-    <section id="carbon-offset-section" class="feature-section" style="display:none;">
-        <h2><i class="fas fa-globe-africa"></i> Carbon Offset Option</h2>
-        <div id="carbon-info">
-            <p>Estimate your trip's carbon footprint and contribute to carbon offsetting projects.</p>
-            <p id="carbon-footprint-estimate">Estimated Carbon Footprint: <span id="footprint-value">-- kg CO2</span></p>
-            <button id="offset-button">Offset Your Trip <i class="fas fa-hand-holding-heart"></i></button>
-        </div>
-    </section>
-
-    <section id="ai-concierge-recommendations" class="feature-section" style="display:none;">
-        <h2><i class="fas fa-robot"></i> Personalized Recommendations Just For You</h2>
-        <div id="ai-recommendations-list">
-        </div>
-        <p>Our AI concierge has handpicked these getaways based on your unique preferences.</p>
-    </section>
-
-
-    <footer>
-        <p>&copy; 2025 Your Travel Agency. All rights reserved.</p>
-        <ul class="footer-links">
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">Privacy Policy</a></li>
-        </ul>
     </footer>
 
     <script src="script.js"></script>
